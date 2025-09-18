@@ -6,6 +6,7 @@ import { Quiz } from '../types/database';
 import Navbar from '../components/Navbar';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Plus, Eye, Edit, Trash2, Users, Clock, BarChart3 } from 'lucide-react';
+import { Share2 } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
@@ -92,7 +93,19 @@ const Dashboard: React.FC = () => {
   const copyQuizLink = (quizId: string) => {
     const link = `${window.location.origin}/quiz/${quizId}`;
     navigator.clipboard.writeText(link);
-    alert('Quiz link copied to clipboard!');
+    
+    // Show a more elegant notification
+    const notification = document.createElement('div');
+    notification.className = 'fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-300';
+    notification.textContent = 'Quiz link copied to clipboard!';
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      setTimeout(() => {
+        document.body.removeChild(notification);
+      }, 300);
+    }, 2000);
   };
 
   if (loading) {
@@ -248,9 +261,9 @@ const Dashboard: React.FC = () => {
                           <button
                             onClick={() => copyQuizLink(quiz.id)}
                             className="text-blue-600 hover:text-blue-900 transition-colors"
-                            title="Copy quiz link"
+                            title="Share quiz link"
                           >
-                            <Eye className="h-5 w-5" />
+                            <Share2 className="h-5 w-5" />
                           </button>
                           <Link
                             to={`/edit/${quiz.id}`}
