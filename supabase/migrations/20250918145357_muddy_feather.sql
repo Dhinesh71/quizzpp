@@ -23,6 +23,7 @@
       - `quiz_id` (uuid, references quizzes)
       - `student_name` (text, required)
       - `student_email` (text, required)
+      - `student_register_number` (text, required)
       - `answers` (jsonb array of selected answers)
       - `score` (integer)
       - `total_questions` (integer)
@@ -61,6 +62,7 @@ CREATE TABLE IF NOT EXISTS responses (
   quiz_id uuid NOT NULL REFERENCES quizzes(id) ON DELETE CASCADE,
   student_name text NOT NULL,
   student_email text NOT NULL,
+  student_register_number text NOT NULL,
   answers jsonb NOT NULL DEFAULT '[]',
   score integer NOT NULL DEFAULT 0,
   total_questions integer NOT NULL DEFAULT 0,

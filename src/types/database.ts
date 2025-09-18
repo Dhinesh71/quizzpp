@@ -59,6 +59,7 @@ export interface Database {
           quiz_id: string;
           student_name: string;
           student_email: string;
+          student_register_number: string;
           answers: string[];
           score: number;
           total_questions: number;
@@ -69,6 +70,7 @@ export interface Database {
           quiz_id: string;
           student_name: string;
           student_email: string;
+          student_register_number: string;
           answers: string[];
           score: number;
           total_questions: number;
@@ -79,6 +81,7 @@ export interface Database {
           quiz_id?: string;
           student_name?: string;
           student_email?: string;
+          student_register_number?: string;
           answers?: string[];
           score?: number;
           total_questions?: number;
@@ -113,6 +116,7 @@ export interface Response {
   quiz_id: string;
   student_name: string;
   student_email: string;
+  student_register_number: string;
   answers: string[];
   score: number;
   total_questions: number;

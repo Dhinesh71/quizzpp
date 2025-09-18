@@ -13,6 +13,7 @@ const TakeQuiz: React.FC = () => {
   const [answers, setAnswers] = useState<string[]>([]);
   const [studentName, setStudentName] = useState('');
   const [studentEmail, setStudentEmail] = useState('');
+  const [studentRegisterNumber, setStudentRegisterNumber] = useState('');
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -85,8 +86,9 @@ const TakeQuiz: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    if (!studentName.trim() || !studentEmail.trim()) {
-      alert('Please enter your name and email');
+
+    if (!studentName.trim() || !studentEmail.trim() || !studentRegisterNumber.trim()) {
+      alert('Please enter your name, email, and register number');
       return;
     }
 
@@ -98,13 +100,13 @@ const TakeQuiz: React.FC = () => {
     setSubmitting(true);
     try {
       const calculatedScore = calculateScore();
-      
       const { error } = await supabase
         .from('responses')
         .insert({
           quiz_id: id!,
           student_name: studentName.trim(),
           student_email: studentEmail.trim(),
+          student_register_number: studentRegisterNumber.trim(),
           answers,
           score: calculatedScore,
           total_questions: questions.length
@@ -234,7 +236,7 @@ const TakeQuiz: React.FC = () => {
           {currentQuestion === 0 && !submitted && (
             <div className="border-t pt-6 mt-6">
               <h3 className="text-lg font-medium text-gray-900 mb-4">Your Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Full Name *
@@ -258,6 +260,19 @@ const TakeQuiz: React.FC = () => {
                     onChange={(e) => setStudentEmail(e.target.value)}
                     className="block w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     placeholder="Enter your email"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Register Number *
+                  </label>
+                  <input
+                    type="text"
+                    value={studentRegisterNumber}
+                    onChange={(e) => setStudentRegisterNumber(e.target.value)}
+                    className="block w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    placeholder="Enter your register number"
                     required
                   />
                 </div>
@@ -307,7 +322,7 @@ const TakeQuiz: React.FC = () => {
             {currentQuestion === questions.length - 1 ? (
               <button
                 onClick={handleSubmit}
-                disabled={submitting || !answers[currentQuestion] || !studentName.trim() || !studentEmail.trim()}
+                disabled={submitting || !answers[currentQuestion] || !studentName.trim() || !studentEmail.trim() || !studentRegisterNumber.trim()}
                 className="flex items-center gap-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-8 py-3 rounded-lg font-medium transition-colors"
               >
                 {submitting ? (
