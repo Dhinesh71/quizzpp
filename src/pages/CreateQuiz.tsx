@@ -231,7 +231,7 @@ const CreateQuiz: React.FC = () => {
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-6">Quiz Details</h2>
             
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <div>
                 <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
                   Quiz Title *
@@ -241,7 +241,7 @@ const CreateQuiz: React.FC = () => {
                   id="title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="block w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                  className="block w-full border border-gray-300 rounded-lg px-3 sm:px-4 py-2 sm:py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   placeholder="Enter your quiz title"
                   required
                 />
@@ -256,7 +256,7 @@ const CreateQuiz: React.FC = () => {
                   rows={3}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="block w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
+                  className="block w-full border border-gray-300 rounded-lg px-3 sm:px-4 py-2 sm:py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
                   placeholder="Provide instructions or context for your quiz"
                 />
               </div>
@@ -264,14 +264,14 @@ const CreateQuiz: React.FC = () => {
           </div>
 
           {/* Questions */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {questions.map((question, questionIndex) => (
               <div key={questionIndex} className="bg-white rounded-lg shadow-md p-6">
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 sm:mb-6 gap-2">
                   <h3 className="text-lg font-semibold text-gray-900">
                     Question {questionIndex + 1}
                   </h3>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 self-end sm:self-auto">
                     {questions.length > 1 && (
                       <>
                         <button
@@ -305,7 +305,7 @@ const CreateQuiz: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                   {/* Question Text */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -315,7 +315,7 @@ const CreateQuiz: React.FC = () => {
                       rows={2}
                       value={question.question_text}
                       onChange={(e) => updateQuestion(questionIndex, 'question_text', e.target.value)}
-                      className="block w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
+                      className="block w-full border border-gray-300 rounded-lg px-3 sm:px-4 py-2 sm:py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
                       placeholder="Enter your question"
                       required
                     />
@@ -326,21 +326,21 @@ const CreateQuiz: React.FC = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-3">
                       Answer Options * (Select the correct answer)
                     </label>
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       {question.options.map((option, optionIndex) => (
-                        <div key={optionIndex} className="flex items-center space-x-3">
+                        <div key={optionIndex} className="flex items-center space-x-2 sm:space-x-3">
                           <input
                             type="radio"
                             name={`correct-${questionIndex}`}
                             checked={question.correct_answer === option}
                             onChange={() => updateQuestion(questionIndex, 'correct_answer', option)}
-                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 flex-shrink-0"
                           />
                           <input
                             type="text"
                             value={option}
                             onChange={(e) => updateOption(questionIndex, optionIndex, e.target.value)}
-                            className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                            className="flex-1 border border-gray-300 rounded-lg px-2 sm:px-3 py-1 sm:py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm sm:text-base"
                             placeholder={`Option ${optionIndex + 1}`}
                             required
                           />
@@ -348,7 +348,7 @@ const CreateQuiz: React.FC = () => {
                             <button
                               type="button"
                               onClick={() => removeOption(questionIndex, optionIndex)}
-                              className="p-2 text-red-400 hover:text-red-600 transition-colors"
+                              className="p-1 sm:p-2 text-red-400 hover:text-red-600 transition-colors flex-shrink-0"
                               title="Remove option"
                             >
                               <Trash2 className="h-4 w-4" />
@@ -362,7 +362,7 @@ const CreateQuiz: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => addOption(questionIndex)}
-                        className="mt-3 text-blue-600 hover:text-blue-700 text-sm font-medium transition-colors flex items-center gap-1"
+                        className="mt-2 sm:mt-3 text-blue-600 hover:text-blue-700 text-sm font-medium transition-colors flex items-center gap-1"
                       >
                         <Plus className="h-4 w-4" />
                         Add Option
@@ -379,7 +379,7 @@ const CreateQuiz: React.FC = () => {
             <button
               type="button"
               onClick={addQuestion}
-              className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-colors flex items-center gap-2 mx-auto"
+              className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition-colors flex items-center gap-2 mx-auto text-sm sm:text-base"
             >
               <Plus className="h-5 w-5" />
               Add Question
@@ -392,7 +392,7 @@ const CreateQuiz: React.FC = () => {
               type="button"
               onClick={() => setPreviewMode(true)}
               disabled={!title.trim() || questions.some(q => !q.question_text.trim())}
-              className="bg-gray-600 hover:bg-gray-700 disabled:bg-gray-400 text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+              className="bg-gray-600 hover:bg-gray-700 disabled:bg-gray-400 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
             >
               <Eye className="h-5 w-5" />
               Preview Quiz
@@ -401,7 +401,7 @@ const CreateQuiz: React.FC = () => {
             <button
               type="submit"
               disabled={loading}
-              className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+              className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
             >
               {loading ? (
                 <LoadingSpinner size="small" />

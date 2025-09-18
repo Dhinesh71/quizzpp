@@ -140,7 +140,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center">
               <div className="bg-blue-100 p-3 rounded-lg">
@@ -228,17 +228,17 @@ const Dashboard: React.FC = () => {
                 <tbody className="bg-white divide-y divide-gray-200">
                   {quizzes.map((quiz) => (
                     <tr key={quiz.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-3 sm:px-6 py-4">
                         <div>
-                          <div className="text-sm font-medium text-gray-900">{quiz.title}</div>
+                          <div className="text-sm font-medium text-gray-900 break-words">{quiz.title}</div>
                           {quiz.description && (
-                            <div className="text-sm text-gray-500 truncate max-w-xs">
+                            <div className="text-sm text-gray-500 break-words max-w-xs sm:max-w-sm">
                               {quiz.description}
                             </div>
                           )}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
                         <button
                           onClick={() => toggleQuizStatus(quiz)}
                           className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full transition-colors ${
@@ -250,13 +250,13 @@ const Dashboard: React.FC = () => {
                           {quiz.is_active ? 'Active' : 'Inactive'}
                         </button>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {responseCounts[quiz.id] || 0}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {new Date(quiz.created_at).toLocaleDateString()}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex items-center space-x-3">
                           <button
                             onClick={() => copyQuizLink(quiz.id)}

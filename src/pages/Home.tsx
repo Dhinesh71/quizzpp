@@ -51,13 +51,13 @@ const Home: React.FC = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-16">
           <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-200 text-center">
             <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
               <BookOpen className="h-8 w-8 text-blue-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-3">Easy Quiz Creation</h3>
-            <p className="text-gray-600">Build quizzes with multiple choice questions in minutes using our intuitive interface.</p>
+            <p className="text-gray-600 text-sm sm:text-base">Build quizzes with multiple choice questions in minutes using our intuitive interface.</p>
           </div>
 
           <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-200 text-center">
@@ -65,7 +65,7 @@ const Home: React.FC = () => {
               <Users className="h-8 w-8 text-emerald-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-3">No Student Login</h3>
-            <p className="text-gray-600">Students can take quizzes instantly without creating accounts or signing up.</p>
+            <p className="text-gray-600 text-sm sm:text-base">Students can take quizzes instantly without creating accounts or signing up.</p>
           </div>
 
           <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-200 text-center">
@@ -73,7 +73,7 @@ const Home: React.FC = () => {
               <BarChart3 className="h-8 w-8 text-purple-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-3">Detailed Analytics</h3>
-            <p className="text-gray-600">View comprehensive results, individual responses, and performance metrics.</p>
+            <p className="text-gray-600 text-sm sm:text-base">View comprehensive results, individual responses, and performance metrics.</p>
           </div>
 
           <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-200 text-center">
@@ -81,23 +81,23 @@ const Home: React.FC = () => {
               <CheckCircle className="h-8 w-8 text-orange-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-3">Instant Results</h3>
-            <p className="text-gray-600">Automatic grading with immediate feedback and score calculation.</p>
+            <p className="text-gray-600 text-sm sm:text-base">Automatic grading with immediate feedback and score calculation.</p>
           </div>
         </div>
 
         {/* Call to Action */}
-        <div className="bg-white rounded-2xl shadow-xl p-12 text-center">
+        <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 lg:p-12 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Ready to Create Your First Quiz?
           </h2>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto">
             Join thousands of educators who trust QuizMaster for their assessment needs. 
             Get started in seconds with our free platform.
           </p>
           {!user && (
             <Link
               to="/login"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 inline-block"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 inline-block"
             >
               Start Creating Quizzes
             </Link>
