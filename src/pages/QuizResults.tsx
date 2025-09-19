@@ -86,7 +86,9 @@ const QuizResults: React.FC = () => {
     const headers = [
       'Student Name',
       'Email',
+      'Register Number',
       'Score',
+      'Total Questions',
       'Percentage',
       'Submitted At',
       ...questions.map((_, index) => `Question ${index + 1}`)
@@ -97,7 +99,9 @@ const QuizResults: React.FC = () => {
       return [
         response.student_name,
         response.student_email,
+        response.student_register_number,
         response.score,
+        response.total_questions,
         `${percentage}%`,
         new Date(response.submitted_at).toLocaleString(),
         ...response.answers
@@ -106,7 +110,7 @@ const QuizResults: React.FC = () => {
 
     const csvContent = [
       headers.join(','),
-      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+      ...rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
     ].join('\n');
 
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -184,7 +188,7 @@ const QuizResults: React.FC = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center">
               <div className="bg-blue-100 p-3 rounded-lg">
@@ -253,19 +257,19 @@ const QuizResults: React.FC = () => {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Student
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Score
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Percentage
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Submitted
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
@@ -275,18 +279,19 @@ const QuizResults: React.FC = () => {
                     const percentage = Math.round((response.score / response.total_questions) * 100);
                     return (
                       <tr key={response.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-3 sm:px-6 py-4">
                           <div>
-                            <div className="text-sm font-medium text-gray-900">{response.student_name}</div>
-                            <div className="text-sm text-gray-500">{response.student_email}</div>
+                            <div className="text-sm font-medium text-gray-900 break-words">{response.student_name}</div>
+                            <div className="text-sm text-gray-500 break-words">{response.student_email}</div>
+                            <div className="text-xs text-gray-400 break-words">{response.student_register_number}</div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-900 font-medium">
                             {response.score}/{response.total_questions}
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
                           <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                             percentage >= 80
                               ? 'bg-green-100 text-green-800'
@@ -297,10 +302,11 @@ const QuizResults: React.FC = () => {
                             {percentage}%
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {new Date(response.submitted_at).toLocaleDateString()} {new Date(response.submitted_at).toLocaleTimeString()}
+                        <td className="px-3 sm:px-6 py-4 text-sm text-gray-500">
+                          <div className="break-words">{new Date(response.submitted_at).toLocaleDateString()}</div>
+                          <div className="text-xs text-gray-400">{new Date(response.submitted_at).toLocaleTimeString()}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <button
                             onClick={() => {
                               const details = questions.map((question, index) => 

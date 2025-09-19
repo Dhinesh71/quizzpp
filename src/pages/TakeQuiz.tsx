@@ -236,7 +236,7 @@ const TakeQuiz: React.FC = () => {
           {currentQuestion === 0 && !submitted && (
             <div className="border-t pt-6 mt-6">
               <h3 className="text-lg font-medium text-gray-900 mb-4">Your Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Full Name *
@@ -245,7 +245,7 @@ const TakeQuiz: React.FC = () => {
                     type="text"
                     value={studentName}
                     onChange={(e) => setStudentName(e.target.value)}
-                    className="block w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    className="block w-full border border-gray-300 rounded-lg px-3 sm:px-4 py-2 sm:py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     placeholder="Enter your name"
                     required
                   />
@@ -258,7 +258,7 @@ const TakeQuiz: React.FC = () => {
                     type="email"
                     value={studentEmail}
                     onChange={(e) => setStudentEmail(e.target.value)}
-                    className="block w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    className="block w-full border border-gray-300 rounded-lg px-3 sm:px-4 py-2 sm:py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     placeholder="Enter your email"
                     required
                   />
@@ -271,7 +271,7 @@ const TakeQuiz: React.FC = () => {
                     type="text"
                     value={studentRegisterNumber}
                     onChange={(e) => setStudentRegisterNumber(e.target.value)}
-                    className="block w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    className="block w-full border border-gray-300 rounded-lg px-3 sm:px-4 py-2 sm:py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     placeholder="Enter your register number"
                     required
                   />
@@ -282,8 +282,8 @@ const TakeQuiz: React.FC = () => {
         </div>
 
         {/* Current Question */}
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+        <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:p-8 mb-8">
+          <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4 sm:mb-6 break-words">
             {currentQuestion + 1}. {questions[currentQuestion].question_text}
           </h2>
           
@@ -291,7 +291,7 @@ const TakeQuiz: React.FC = () => {
             {questions[currentQuestion].options.map((option, optionIndex) => (
               <label
                 key={optionIndex}
-                className="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 cursor-pointer transition-all duration-200"
+                className="flex items-start sm:items-center p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 cursor-pointer transition-all duration-200"
               >
                 <input
                   type="radio"
@@ -299,31 +299,31 @@ const TakeQuiz: React.FC = () => {
                   value={option}
                   checked={answers[currentQuestion] === option}
                   onChange={() => handleAnswerChange(option)}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 flex-shrink-0 mt-0.5 sm:mt-0"
                 />
-                <span className="ml-4 text-gray-900 text-lg">{option}</span>
+                <span className="ml-3 sm:ml-4 text-gray-900 text-base sm:text-lg break-words">{option}</span>
               </label>
             ))}
           </div>
         </div>
 
         {/* Navigation */}
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <button
             onClick={previousQuestion}
             disabled={currentQuestion === 0}
-            className="flex items-center gap-2 px-6 py-3 text-gray-600 hover:text-gray-900 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 text-gray-600 hover:text-gray-900 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors text-sm sm:text-base order-2 sm:order-1"
           >
             <ChevronLeft className="h-5 w-5" />
             Previous
           </button>
 
-          <div className="flex gap-4">
+          <div className="flex gap-4 order-1 sm:order-2">
             {currentQuestion === questions.length - 1 ? (
               <button
                 onClick={handleSubmit}
                 disabled={submitting || !answers[currentQuestion] || !studentName.trim() || !studentEmail.trim() || !studentRegisterNumber.trim()}
-                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-medium transition-colors text-sm sm:text-base"
               >
                 {submitting ? (
                   <LoadingSpinner size="small" />
@@ -336,7 +336,7 @@ const TakeQuiz: React.FC = () => {
               <button
                 onClick={nextQuestion}
                 disabled={!answers[currentQuestion]}
-                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition-colors text-sm sm:text-base"
               >
                 Next
                 <ChevronRight className="h-5 w-5" />
